@@ -17,7 +17,6 @@ for folder in f:
     direct = ROOT + folder + '\\'
     print(direct)
 
-    j = 0
     for filename in glob.glob(direct + '*.jpg'):
         print (filename)
 
@@ -29,10 +28,9 @@ for folder in f:
         features = model.predict(x)
 
         names = filename.split('\\')
-        newName = 'features' + '\\' + names[1] + '\\' + str(j) + '.npy'
+        count = names[2].split('.')
+        newName = 'features' + '\\' + names[1] + '\\' + count[0] + '.npy'
 
         np.save (newName, features)
-
-        j = j + 1
 
         # print (features)
