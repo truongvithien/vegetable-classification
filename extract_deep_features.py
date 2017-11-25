@@ -9,16 +9,16 @@ from keras.models import Model
 
 base_model = VGG16(weights='imagenet')
 model = Model(inputs=base_model.input, outputs=base_model.get_layer('fc2').output)
-ROOT = 'images\\'
+ROOT = 'images/'
 
 f = os.listdir('images')
 
 for folder in f:
-    direct = ROOT + folder + '\\'
+    direct = ROOT + folder + '/'
     print(direct)
 
     for filename in glob.glob(direct + '*.jpg'):
-        print (filename)
+        print(filename)
 
         img = image.load_img(filename, target_size=(224, 224))
         x = image.img_to_array(img)
@@ -27,10 +27,10 @@ for folder in f:
 
         features = model.predict(x)
 
-        names = filename.split('\\')
+        names = filename.split('/')
         count = names[2].split('.')
-        newName = 'features' + '\\' + names[1] + '\\' + count[0] + '.npy'
+        newName = 'features' + '/' + names[1] + '/' + count[0] + '.npy'
 
-        np.save (newName, features)
+        np.save(newName, features)
 
         # print (features)
