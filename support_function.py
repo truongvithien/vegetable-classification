@@ -1,4 +1,5 @@
 import numpy as np
+import os
 
 def get_feature(img_name):
     """
@@ -18,3 +19,32 @@ def get_feature(img_name):
     #print(img_feature_data)
 
     return img_feature_name, img_feature_data
+
+def get_features_labels_from_folder(name_folder_direct, datatype):
+    db_ROOT = name_folder_direct
+    name_file_direct = db_ROOT + "/" + str(datatype) +".txt"
+    Y = []
+    X = []
+
+    with open(name_file_direct) as name_file:
+        names = name_file.read().splitlines()
+
+    for name in names:
+        X.append(get_feature(name)[1])
+
+
+    X = np.asarray(X)
+    X = X.reshape((X.shape[0], X.shape[2]))
+
+    #print(X.shape)
+
+    label_file_direct = db_ROOT + "/" + "lb" + str(datatype) + ".txt"
+
+    with open(label_file_direct) as label_file:
+        Y = label_file.read().splitlines()
+
+    Y = np.array(Y)
+    Y = Y.reshape((1, Y.shape[0])).T
+    #print(Y.shape)
+    return X, Y
+
