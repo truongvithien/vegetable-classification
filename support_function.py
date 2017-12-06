@@ -45,6 +45,7 @@ def get_features_labels_from_folder(name_folder_direct, datatype):
 
     Y = np.array(Y)
     Y = Y.reshape((1, Y.shape[0])).T
+    Y = np.ravel(Y)
     #print(Y.shape)
     return X, Y
 
