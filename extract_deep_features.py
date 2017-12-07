@@ -24,18 +24,29 @@ def feature_extract(model_name):
         base_model = VGG19(weights='imagenet')
         folder_name = 'vgg19_features/'
 
+<<<<<<< HEAD
     if model_name == "vgg16":
         base_model = VGG19(weights='imagenet')
         folder_name = 'vgg16_features/'
+=======
+    j = 0
+    for filename in glob.glob(direct + '*.jpg'):
+        print (filename)
+>>>>>>> master
 
     model = Model(inputs=base_model.input, outputs=base_model.get_layer('fc2').output)
     ROOT = 'images/'
 
     f = os.listdir('images')
 
+<<<<<<< HEAD
     for folder in f:
         direct = ROOT + folder + '/'
         print(direct)
+=======
+        names = filename.split('\\')
+        newName = 'features' + '\\' + names[1] + '\\' + str(j) + '.npy'
+>>>>>>> master
 
         for filename in glob.glob(direct + '*.jpg'):
             print(filename)
@@ -58,3 +69,9 @@ def feature_extract(model_name):
 
 #feature_extract("vgg16")
 
+<<<<<<< HEAD
+=======
+        j = j + 1
+
+        # print (features)
+>>>>>>> master
