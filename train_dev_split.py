@@ -5,6 +5,15 @@ from sklearn.model_selection import train_test_split
 
 
 def one_random_split(dev_size):
+    """
+    Author: Trinh Man Hoang
+    :param  dev_size : size of dev_set < 1
+    :return:
+        X_train, X_dev, Y_train, Y_dev respectively
+    :usage:
+        from . import train_dev_split as spl
+        X, Y = spl.one_random_split(devsize)
+    """
 
     i_l_ROOT = 'images/'
     f = os.listdir('images')
@@ -32,6 +41,18 @@ def one_random_split(dev_size):
 
 
 def k_split_sample(k_set, size):
+    """
+    Author: Trinh Man Hoang
+    :param  k_set: #train_split sets
+            dev_size : size of dev_set < 1
+    :return:
+        k_set folders (in db_Root) contains random splitting
+    :usage:
+        from . import train_dev_split as spl
+        spl.k_split_sample(kset, devsize)
+    """
+
+
     db_ROOT = 'db/'
 
     for k in range(k_set):
@@ -68,4 +89,4 @@ def k_split_sample(k_set, size):
         lbval_file.close()
         lbdev_file.close()
 
-
+#k_split_sample(5, 0.2)
