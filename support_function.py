@@ -16,9 +16,10 @@ def get_feature(img_name, feature_type):
     img_feature_name = img_name
     img_feature_name = img_feature_name.replace("images",str(feature_type) + "_features")
     img_feature_name = img_feature_name.replace("jpg","npy")
+    img_feature_name = img_feature_name.replace("JPG","npy")
 
     img_feature_data = np.load(img_feature_name)
-    #print(img_feature_data)
+    # print(img_feature_data)
 
     return img_feature_name, img_feature_data
 
@@ -39,7 +40,7 @@ def get_features_labels_from_folder(name_folder_direct, datatype, feature_type):
 
 
     db_ROOT = name_folder_direct
-    name_file_direct = db_ROOT + "/" + str(datatype) +".txt"
+    name_file_direct = db_ROOT + "\\" + str(datatype) +".txt"
     Y = []
     X = []
 
@@ -55,7 +56,7 @@ def get_features_labels_from_folder(name_folder_direct, datatype, feature_type):
 
     #print(X.shape)
 
-    label_file_direct = db_ROOT + "/" + "lb" + str(datatype) + ".txt"
+    label_file_direct = db_ROOT + "\\" + "lb" + str(datatype) + ".txt"
 
     with open(label_file_direct) as label_file:
         Y = label_file.read().splitlines()

@@ -15,14 +15,14 @@ def one_random_split(dev_size):
         X, Y = spl.one_random_split(devsize)
     """
 
-    i_l_ROOT = 'images/'
+    i_l_ROOT = 'images\\'
     f = os.listdir('images')
 
     X = []
     Y = []
 
     for folder in f:
-        direct = i_l_ROOT + folder + '/'
+        direct = i_l_ROOT + folder + '\\'
         l_direct = direct + folder + ".txt"
 
 
@@ -53,11 +53,11 @@ def k_split_sample(k_set, size):
     """
 
 
-    db_ROOT = 'db/'
+    db_ROOT = 'db\\'
 
     for k in range(k_set):
 
-        db_direct = db_ROOT + "db" + str(k) + "/"
+        db_direct = db_ROOT + "db" + str(k) + "\\"
         if not os.path.exists(db_direct):
             os.makedirs(db_direct)
         else:
@@ -89,4 +89,4 @@ def k_split_sample(k_set, size):
         lbval_file.close()
         lbdev_file.close()
 
-#k_split_sample(5, 0.2)
+# k_split_sample(5, 0.33)
