@@ -40,7 +40,8 @@ def get_features_labels_from_folder(name_folder_direct, datatype, feature_type):
 
 
     db_ROOT = name_folder_direct
-    name_file_direct = db_ROOT + "\\" + str(datatype) +".txt"
+    name_file_direct = os.path.join(name_folder_direct, str(datatype) +".txt")
+    #name_file_direct = db_ROOT + "/" + str(datatype) +".txt"
     Y = []
     X = []
 
@@ -56,7 +57,9 @@ def get_features_labels_from_folder(name_folder_direct, datatype, feature_type):
 
     #print(X.shape)
 
-    label_file_direct = db_ROOT + "\\" + "lb" + str(datatype) + ".txt"
+    label_file_direct = os.path.join(db_ROOT, "lb" + str(datatype) + ".txt")
+
+    #label_file_direct = db_ROOT + "/" + "lb" + str(datatype) + ".txt"
 
     with open(label_file_direct) as label_file:
         Y = label_file.read().splitlines()
