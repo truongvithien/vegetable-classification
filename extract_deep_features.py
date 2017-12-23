@@ -14,7 +14,7 @@ from keras.models import Model
 
 def feature_extract(model_name):
     """
-    Author: Vu The Dung, Trinh Man Hoang
+    Author: Vu The Dung, Trinh Man Hoang, Truong Vi Thien
     :param  model_name: vgg16, vgg19, inceptionV3
     :return:
         features were extracted and stored in to correlative folders
