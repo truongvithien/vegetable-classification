@@ -25,8 +25,8 @@ for data_direct in os.listdir(Root):
 
     folder_direct = os.path.join(Root, data_direct)
     #folder_direct = Root + data_direct + '/'
-    X_train, Y_train = support_function.get_features_labels_from_folder(folder_direct,'train', 'inceptionV3')
-    X_test, Y_test = support_function.get_features_labels_from_folder(folder_direct,'dev', 'inceptionV3')
+    X_train, Y_train = support_function.get_features_labels_from_folder(folder_direct,'train', 'xception')
+    X_test, Y_test = support_function.get_features_labels_from_folder(folder_direct,'dev', 'xception')
 
     SVM_model = SVM.my_svm(X_train, Y_train)
     SVM_pred_labels = SVM_model.predict(X_test)

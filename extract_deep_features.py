@@ -1,10 +1,12 @@
 from keras.applications.vgg16 import VGG16
 from keras.applications.vgg19 import VGG19
 from keras.applications import InceptionV3
+from keras.applications import Xception
 from keras.preprocessing import image
 from keras.applications.vgg16 import preprocess_input as vgg16_pi
 from keras.applications.vgg19 import preprocess_input as vgg19_pi
 from keras.applications.inception_v3 import preprocess_input as iv3_pi
+from keras.applications.xception import preprocess_input as xc_pi
 import numpy as np
 import os
 import glob
@@ -85,8 +87,7 @@ def feature_extract(model_name):
         base_model = InceptionV3(weights='imagenet')
         folder_name = 'inceptionV3_features\\'
 
-        model = base_model
-
+        model = Model(inputs=base_model.input, outputs=base_model.get_layer('avg_pool').output)
         for folder in f:
             direct = ROOT + folder + '\\'
             print(direct)
@@ -108,7 +109,35 @@ def feature_extract(model_name):
                     os.makedirs(newpath)
                 newName = newpath + count[0] + '.npy'
                 np.save(newName, features)
+
+    elif model_name == 'xception':
+        base_model = Xception(weights='imagenet')
+        folder_name = 'xception_features\\'
+
+        model = Model(inputs=base_model.input, outputs=base_model.get_layer('avg_pool').output)
+
+        for folder in f:
+            direct = ROOT + folder + '\\'
+            print(direct)
+
+            for filename in glob.glob(direct + '*.jpg'):
+                print(filename)
+
+                img = image.load_img(filename, target_size=(299, 299))
+                x = image.img_to_array(img)
+                x = np.expand_dims(x, axis=0)
+                x = xc_pi(x)
+
+                features = model.predict(x)
+
+                names = filename.split('\\')
+                count = names[2].split('.')
+                newpath = r'' + folder_name + names[1] + '\\'
+                if not os.path.exists(newpath):
+                    os.makedirs(newpath)
+                newName = newpath + count[0] + '.npy'
+                np.save(newName, features)
     else:
         print('Not support model ' + model_name)
-feature_extract('inception')
+feature_extract('xception')
 
